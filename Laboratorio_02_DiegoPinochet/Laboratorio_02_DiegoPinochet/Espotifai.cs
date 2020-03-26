@@ -9,10 +9,8 @@ namespace Laboratorio_02_DiegoPinochet
     class Espotifai
     {
         List<Cancion> Canciones = new List<Cancion>();
-        List<Cancion> CancionesCriterio = new List<Cancion>();
         public List<Playlist> List_Playlist = new List<Playlist>();
-        public List<Cancion> Lista_musica = new List<Cancion>();
-
+        public List<Cancion> Lista_music = new List<Cancion>();
         public Espotifai()
         {
 
@@ -54,18 +52,17 @@ namespace Laboratorio_02_DiegoPinochet
 
         public List<Cancion> CancionesPorCriterio(string criterio, string valor)
         {
+            List<Cancion> CancionesCriterio = new List<Cancion>();
+
             if (criterio == "canción")
             {
                 foreach (Cancion elementos in Canciones)
                 {
-                    string songs = elementos.Informacion();
-                    if (songs.Contains(valor) == true)
+                    List<string> inform = elementos.Info_Canciones();
+
+                    if (inform.Contains(valor) == true)
                     {
                         CancionesCriterio.Add(elementos);
-                    }
-                    else
-                    {
-                        Console.WriteLine("No se han encontrado canciones con criterio...");
                     }
                 }
                 return CancionesCriterio;
@@ -75,14 +72,11 @@ namespace Laboratorio_02_DiegoPinochet
             {
                 foreach (Cancion elementos in Canciones)
                 {
-                    string songs = elementos.Informacion();
-                    if (songs.Contains(valor) == true)
+                    List<string> inform = elementos.Info_Canciones();
+
+                    if (inform.Contains(valor) == true)
                     {
                         CancionesCriterio.Add(elementos);
-                    }
-                    else
-                    {
-                        Console.WriteLine("No se han encontrado canciones con criterio...");
                     }
                 }
                 return CancionesCriterio;
@@ -92,15 +86,11 @@ namespace Laboratorio_02_DiegoPinochet
             {
                 foreach (Cancion elementos in Canciones)
                 {
-                    string songs = elementos.Informacion();
-                    if (songs.Contains(valor) == true)
+                    List<string> inform = elementos.Info_Canciones();
+
+                    if (inform.Contains(valor) == true)
                     {
                         CancionesCriterio.Add(elementos);
-                    }
-                    else
-                    {
-                        Console.WriteLine("No se han encontrado canciones con criterio...");
-
                     }
                 }
                 return CancionesCriterio;
@@ -109,15 +99,11 @@ namespace Laboratorio_02_DiegoPinochet
             {
                 foreach (Cancion elementos in Canciones)
                 {
-                    string songs = elementos.Informacion();
-                    if (songs.Contains(valor) == true)
+                    List<string> inform = elementos.Info_Canciones();
+
+                    if (inform.Contains(valor) == true)
                     {
                         CancionesCriterio.Add(elementos);
-                    }
-                    else
-                    {
-                        Console.WriteLine("No se han encontrado canciones con criterio...");
-
                     }
                 }
                 return CancionesCriterio;
@@ -127,18 +113,22 @@ namespace Laboratorio_02_DiegoPinochet
                 Console.WriteLine("Este criterio no existe, busca otro...");
                 return CancionesCriterio;
             }
+           
         }
 
         public bool GenerarPlaylist(string criterio_, string valorCriterio, string nombrePlaylist)
         {
-            Playlist playlist = new Playlist(nombrePlaylist);
+            List<Cancion> Lista_musica = CancionesPorCriterio(criterio_,valorCriterio);
+            Playlist playlist = new Playlist(nombrePlaylist, Lista_musica);
 
-            foreach (Cancion elemento in CancionesCriterio)
+            //Agregar canciones a la playlist
+            foreach (Cancion canciones in Lista_musica)
             {
-                string sort_songs = elemento.Informacion();
-                if (sort_songs.Contains(valorCriterio) == true)
+                List<string> song = canciones.Info_Canciones();
+
+                if (song.Contains(valorCriterio) == true)
                 {
-                    Lista_musica.Add(elemento);
+                    Lista_music.Add(canciones);
                 }
                 else
                 {
@@ -148,6 +138,7 @@ namespace Laboratorio_02_DiegoPinochet
 
             }
 
+            //Existe o no la playlist
             int comparacion = 0;
             for (int x = 0; x < List_Playlist.Count(); x++)
             {
@@ -166,24 +157,27 @@ namespace Laboratorio_02_DiegoPinochet
             {
                 return false;
             }
+
         }
 
 
         public string VermisPlaylists()
         {
+            string sort_songs = "";
+            string x = "";
+            
             foreach (Playlist valor in List_Playlist)
             {
-                string x = valor.Información_Playlist();
+                x = "" + valor.Información_Playlist();
 
-                foreach (Cancion cancion in Lista_musica)
+                foreach (Cancion cancion in Lista_music)
                 {
                     
-                    string sort_song = cancion.Informacion(); // Hay que entregar todo en u string
-
+                    sort_songs = sort_songs + "; Informacion de la Canción: " + cancion.Informacion();
                 }
             }
-
-            return x; //OJO con esto
+            string final = x + sort_songs;
+            return final;
         }
 
     }

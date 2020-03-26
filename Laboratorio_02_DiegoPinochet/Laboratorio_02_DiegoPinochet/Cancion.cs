@@ -8,6 +8,8 @@ namespace Laboratorio_02_DiegoPinochet
 {
     class Cancion
     {
+        private List<string> Info_Cancion = new List<string>();
+
         private string Nombre;
         private string Album;
         private string Artista;
@@ -26,6 +28,16 @@ namespace Laboratorio_02_DiegoPinochet
             string informacion = ("genero: " + Genero + ", artista: " + Artista + ", album: " + Album + ", nombre: " + Nombre);
 
             return informacion;
+        }
+
+        public List<string> Info_Canciones()
+        {
+            Info_Cancion.Add(Genero);
+            Info_Cancion.Add(Artista);
+            Info_Cancion.Add(Album);
+            Info_Cancion.Add(Nombre);
+
+            return Info_Cancion;
         }
     }
 }

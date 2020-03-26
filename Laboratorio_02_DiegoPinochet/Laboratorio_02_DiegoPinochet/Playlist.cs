@@ -8,14 +8,14 @@ namespace Laboratorio_02_DiegoPinochet
 {
     class Playlist
     {
-        Cancion[] playlist = new Cancion[2];
-
+        private List<Cancion> Lista_musica = new List<Cancion>();
         private string nombre;
 
 
-        public Playlist(string nombre)
+        public Playlist(string nombre, List<Cancion> Lista_musica)
         {
             this.nombre = nombre;
+            this.Lista_musica = Lista_musica;
         }
 
         public string Información_Playlist()

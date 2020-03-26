@@ -21,8 +21,9 @@ namespace Laboratorio_02_DiegoPinochet
             Console.WriteLine("1. Ver todas las canciones.");
             Console.WriteLine("2. Agregar una canción.");
             Console.WriteLine("3. Ver canciones por criterio.");
-            Console.WriteLine("4. Ver Playlists");
-            Console.WriteLine("5. Cerrar el programa");
+            Console.WriteLine("4. Crear una Playlist");
+            Console.WriteLine("5. Ver las Playlists");
+            Console.WriteLine("6. Cerrar el programa");
 
             bool x = true;
 
@@ -55,7 +56,7 @@ namespace Laboratorio_02_DiegoPinochet
                         Console.WriteLine(u);
                     }
 
-                    Console.WriteLine("Puede ver la lista de canciones (1), agregar más canciones (2), ver listas por criterio (3), ver lista de playlist (4) o cerrar el programa (5)...");
+                    Console.WriteLine("Puede ver la lista de canciones (1), agregar más canciones (2), ver listas por criterio (3), crear una playlist (4), ver Playlists o cerrar el programa (6)...");
 
                 }
                 else if (eleccion == "3")
@@ -63,19 +64,24 @@ namespace Laboratorio_02_DiegoPinochet
                     Console.WriteLine("Elige un criterio para ver las canciones (canción, álbum, artista o género): ");
                     string criterio = Console.ReadLine();
 
-                    if (criterio == "canción" || criterio == "álbum" || criterio == "artista" || criterio == "género")
-                    {
                         Console.WriteLine("Dime en específico que canción, álbum, artista o género buscas...");
                         string valor = Console.ReadLine();
 
                         List<Cancion> CancionesCriterio = spotify.CancionesPorCriterio(criterio, valor);
 
-                        foreach (Cancion elemento in CancionesCriterio)
+                        if (CancionesCriterio.Count != 0)
                         {
-                            string song = elemento.Informacion();
-                            Console.WriteLine(song);
+                            foreach (Cancion elemento in CancionesCriterio)
+                            {
+                                string song = elemento.Informacion();
+                                Console.WriteLine(song);
+                            }
                         }
-                    }
+                        else
+                        {
+                            Console.WriteLine("No se han encontrado canciones con este criterio...");
+                        }
+                    
                 }
                 else if (eleccion == "4")
                 {
@@ -109,7 +115,7 @@ namespace Laboratorio_02_DiegoPinochet
 
                 else if (eleccion == "5")
                 {
-
+                    Console.WriteLine(spotify.VermisPlaylists());
                 }
 
 
