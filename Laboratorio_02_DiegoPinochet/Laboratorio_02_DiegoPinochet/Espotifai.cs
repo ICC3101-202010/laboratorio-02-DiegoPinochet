@@ -8,5 +8,6 @@ namespace Laboratorio_02_DiegoPinochet
 {
     class Espotifai
     {
+
     }
 }
