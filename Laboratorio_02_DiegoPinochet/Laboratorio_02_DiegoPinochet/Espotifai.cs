@@ -10,8 +10,8 @@ namespace Laboratorio_02_DiegoPinochet
     {
         List<Cancion> Canciones = new List<Cancion>();
         List<Cancion> CancionesCriterio = new List<Cancion>();
-        List<Playlist> List_Playlist = new List<Playlist>();
-        List<Cancion> Lista_musica = new List<Cancion>();
+        public List<Playlist> List_Playlist = new List<Playlist>();
+        public List<Cancion> Lista_musica = new List<Cancion>();
 
         public Espotifai()
         {
@@ -171,19 +171,19 @@ namespace Laboratorio_02_DiegoPinochet
 
         public string VermisPlaylists()
         {
-            string x = "";
-            foreach (Playlist elemento in List_Playlist)
+            foreach (Playlist valor in List_Playlist)
             {
-                string nombre_Playlist = elemento.Información_Playlist();
-                Console.WriteLine(nombre_Playlist);
+                string x = valor.Información_Playlist();
 
                 foreach (Cancion cancion in Lista_musica)
                 {
-                    string sort_song = cancion.Informacion();
-                    return sort_song;
+                    
+                    string sort_song = cancion.Informacion(); // Hay que entregar todo en u string
+
                 }
             }
-            return x;
+
+            return x; //OJO con esto
         }
 
     }

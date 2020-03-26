@@ -99,21 +99,27 @@ namespace Laboratorio_02_DiegoPinochet
                         {
                             Console.WriteLine(i);
                         }
-                        Console.WriteLine("Tus playlists son: ");
-                        Console.WriteLine(spotify.VermisPlaylists());
                     }
+
                     else
                     {
                         Console.WriteLine("Criterio inválido, intentelo de nuevo...");
                     }
-
-
                 }
 
-                else
+                else if (eleccion == "5")
                 {
-                    break;
+
                 }
+
+
+
+
+
+                    else
+                    {
+                        break;
+                    }
 
             }
         }
