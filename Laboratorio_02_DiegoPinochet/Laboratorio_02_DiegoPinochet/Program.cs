@@ -118,14 +118,10 @@ namespace Laboratorio_02_DiegoPinochet
                     Console.WriteLine(spotify.VermisPlaylists());
                 }
 
-
-
-
-
-                    else
-                    {
-                        break;
-                    }
+                else
+                {
+                    break;
+                }
 
             }
         }

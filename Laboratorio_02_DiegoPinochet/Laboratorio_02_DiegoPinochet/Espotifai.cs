@@ -120,6 +120,7 @@ namespace Laboratorio_02_DiegoPinochet
         {
             List<Cancion> Lista_musica = CancionesPorCriterio(criterio_,valorCriterio);
             Playlist playlist = new Playlist(nombrePlaylist, Lista_musica);
+            
 
             //Agregar canciones a la playlist
             foreach (Cancion canciones in Lista_musica)
@@ -166,18 +167,19 @@ namespace Laboratorio_02_DiegoPinochet
             string sort_songs = "";
             string x = "";
             
-            foreach (Playlist valor in List_Playlist)
+            for (int y = 0; y < List_Playlist.Count(); y++)
             {
-                x = "" + valor.Información_Playlist();
+                x = x + List_Playlist[y].Información_Playlist() + "\n";
 
-                foreach (Cancion cancion in Lista_music)
+                for (int i = 0; i < Lista_music.Count(); i++) 
                 {
-                    
-                    sort_songs = sort_songs + "; Informacion de la Canción: " + cancion.Informacion();
+ 
+                    sort_songs = sort_songs + "; Informacion de la Canción: " + Lista_music[i].Informacion() + "\n";
                 }
+                string final = x + sort_songs; //Aqui hay un problema.
+                return final;
             }
-            string final = x + sort_songs;
-            return final;
+            return "";
         }
 
     }
