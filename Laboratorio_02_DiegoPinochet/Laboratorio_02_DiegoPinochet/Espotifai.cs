@@ -9,8 +9,8 @@ namespace Laboratorio_02_DiegoPinochet
     class Espotifai
     {
         List<Cancion> Canciones = new List<Cancion>();
-        public List<Playlist> List_Playlist = new List<Playlist>();
-        public List<Cancion> Lista_music = new List<Cancion>();
+        List<Playlist> List_Playlist = new List<Playlist>();
+
         public Espotifai()
         {
 
@@ -113,74 +113,73 @@ namespace Laboratorio_02_DiegoPinochet
                 Console.WriteLine("Este criterio no existe, busca otro...");
                 return CancionesCriterio;
             }
-           
+
         }
 
         public bool GenerarPlaylist(string criterio_, string valorCriterio, string nombrePlaylist)
         {
-            List<Cancion> Lista_musica = CancionesPorCriterio(criterio_,valorCriterio);
-            Playlist playlist = new Playlist(nombrePlaylist, Lista_musica);
-            
+            List<Cancion> Lista_musi = CancionesPorCriterio(criterio_, valorCriterio);
+            List<Cancion> Lista_music = new List<Cancion>();
+
+            Playlist playlist = new Playlist(nombrePlaylist, Lista_music);
 
             //Agregar canciones a la playlist
-            foreach (Cancion canciones in Lista_musica)
-            {
-                List<string> song = canciones.Info_Canciones();
 
+            foreach(Cancion elemento in Lista_musi)
+            {
+                List<string> song = elemento.Info_Canciones();
                 if (song.Contains(valorCriterio) == true)
                 {
-                    Lista_music.Add(canciones);
+                    Lista_music.Add(elemento);
                 }
                 else
                 {
-                    Console.WriteLine("No existen canciones que satisfagan este criterio...");
+                    Console.WriteLine("No existen canciones que satisfagan este criterio, intete otra vez...");
                     return false;
                 }
-
             }
 
-            //Existe o no la playlist
-            int comparacion = 0;
-            for (int x = 0; x < List_Playlist.Count(); x++)
+            int cont = 0;
+
+            for (int i = 0; i < List_Playlist.Count; i++)
             {
-                if (List_Playlist[x].Información_Playlist() == playlist.Información_Playlist())
+                if (List_Playlist[i].Información_Playlist() == playlist.Información_Playlist())
                 {
-                    comparacion++;
+                    cont++;
                 }
             }
 
-            if (comparacion == 0)
+            if(cont == 0)
             {
                 List_Playlist.Add(playlist);
                 return true;
             }
             else
             {
+                Console.WriteLine("Ya existe una Playlist con este nombre, intentelo otra vez...");
                 return false;
             }
+            
 
         }
 
 
         public string VermisPlaylists()
         {
-            string sort_songs = "";
             string x = "";
-            
+
             for (int y = 0; y < List_Playlist.Count(); y++)
             {
-                x = x + List_Playlist[y].Información_Playlist() + "\n";
-
-                for (int i = 0; i < Lista_music.Count(); i++) 
+                foreach(Cancion elemento in List_Playlist[y].Info_List())
                 {
- 
-                    sort_songs = sort_songs + "; Informacion de la Canción: " + Lista_music[i].Informacion() + "\n";
+                    string final = elemento.Informacion();
+                    x = x + List_Playlist[y].Información_Playlist() + "\n" + "Información CANCION: " + final + ". \n";
                 }
-                string final = x + sort_songs; //Aqui hay un problema.
-                return final;
-            }
-            return "";
-        }
 
+            }
+            return x;
+
+        }
     }
 }
+

@@ -23,5 +23,10 @@ namespace Laboratorio_02_DiegoPinochet
             string info_playlist = ("Nombre de la PLaylist: " + nombre);
             return info_playlist;
         }
+
+        public List<Cancion> Info_List()
+        {
+            return Lista_musica;
+        }
     }
 }
